@@ -10,10 +10,10 @@ void SystemCheck::loop() {
         lastWiFiConnectedState = millis();
     }
 
-    if (hasTimeoutOccur(lastWebCall, 600)) {
-        Serial.println("Reseting based on the lastWebCall timestamp!");
-        ESP.reset();
-    }
+    // if (hasTimeoutOccur(lastWebCall, 600)) {
+    //     Serial.println("Reseting based on the lastWebCall timestamp!");
+    //     ESP.reset();
+    // }
 
     if (hasTimeoutOccur(lastWiFiConnectedState, 120)) {
         Serial.println("Reseting based on the lastWiFiConnectedState timestamp!");

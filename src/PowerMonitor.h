@@ -12,15 +12,18 @@
 #include "SystemCheck.h"
 #include "WebServer.h"
 #include "WiFi.h"
+#include "LED.h"
+#include "Relay.h"
 
 #define HTTP_PORT 80
 #define HOSTNAME "power-monitor"
 
-#define I2C_SCL D1
-#define I2C_SDA D2
-#define RED D5
-#define GREEN D7
-#define BLUE D6
+// Buttons
+#define BUTTON_PIN   D3  //GPIO0
+#define RELAY_PIN    D6  //GPIO12
+#define RED_LED_PIN  D6  //GPIO12
+#define BLUE_LED_PIN D7  //GPIO13
+#define CSE7789_PIN  TX  //U0RXD
 
 #define MIN_TO_MILLIS(mins) (mins * 60L * 1000L)
 

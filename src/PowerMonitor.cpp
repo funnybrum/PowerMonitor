@@ -12,11 +12,15 @@ void setup()
 
     webServer.begin();
     systemCheck.begin();
+    led.begin();
+    relay.begin();
 }
 
 void loop() {
     webServer.loop();
     settings.loop();
     systemCheck.loop();
+    led.loop();
+    relay.loop();
     delay(100);
 }

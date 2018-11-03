@@ -5,6 +5,8 @@ WebServer::WebServer(int port) {
     _server = new ESP8266WebServer(port);
     _server->on("/", std::bind(&WebServer::handle_root, this));
     _server->on("/get", std::bind(&WebServer::handle_get, this));
+    _server->on("/on", std::bind(&WebServer::handle_on, this));
+    _server->on("/off", std::bind(&WebServer::handle_off, this));
     _server->on("/settings", std::bind(&WebServer::handle_settings, this));
     _server->on("/reset", std::bind(&WebServer::handle_reset, this));
     _server->on("/hard-reset", std::bind(&WebServer::handle_hard_reset, this));
@@ -88,6 +90,18 @@ void WebServer::handle_hard_reset() {
     systemCheck.registerWebCall();
     settings.erase();
     _server->send(200, "text/plain", "Settings erased.");
+}
+
+void WebServer::handle_on() {
+    systemCheck.registerWebCall();
+    _server->send(200);
+    relay.on();
+}
+
+void WebServer::handle_off() {
+    systemCheck.registerWebCall();
+    _server->send(200);
+    relay.off();
 }
 
 WebServer webServer = WebServer(HTTP_PORT);

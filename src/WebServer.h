@@ -15,6 +15,8 @@ class WebServer {
 
         void handle_root();
         void handle_get();
+        void handle_on();
+        void handle_off();
         void handle_settings();
         void handle_reset();
         void handle_hard_reset();
