@@ -20,7 +20,7 @@
 #define HTTP_PORT 80
 #define HOSTNAME "power-monitor"
 
-#define LOG_SIZE 150
+#define LOG_SIZE 1024
 
 // Buttons
 #define BUTTON_PIN   D3  //GPIO0

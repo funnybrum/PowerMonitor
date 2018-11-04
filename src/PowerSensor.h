@@ -17,12 +17,20 @@ class PowerSensor {
     public:
         void begin();
         void loop();
-        float getPower();
-        float getVoltage();
-        float getCurrent();
+        float getPower_W();
+        float getVoltage_V();
+        float getCurrent_mA();
 
     private:
-        char data[24];
+        uint8_t data[24];
+        int pos = 0;
+
+        long voltage;
+        long current;
+        long power;
+
+        bool isChecksumCorrect();
+        void processPacket();
 };
 
 extern PowerSensor powerSensor;

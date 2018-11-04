@@ -38,7 +38,11 @@ void WebServer::handle_get() {
     systemCheck.registerWebCall();
 
     char resp[strlen_P(GET_JSON) + 32];
-    sprintf_P(resp, GET_JSON);
+    sprintf_P(resp,
+              GET_JSON,
+              powerSensor.getVoltage_V(),
+              powerSensor.getCurrent_mA(),
+              powerSensor.getPower_W());
     _server->send(200, "application/json", resp);
 }
 
@@ -111,12 +115,10 @@ void WebServer::handle_off() {
 }
 
 void WebServer::handle_logs() {
-    logger.log("/logs");
     systemCheck.registerWebCall();
     char buffer[LOG_SIZE];
     logger.getLogs(buffer, sizeof(buffer));
     _server->send(200, "text/html", buffer);
-    relay.off();
 }
 
 WebServer webServer = WebServer(HTTP_PORT);

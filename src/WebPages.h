@@ -18,4 +18,7 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
 )=====";
 
 const char GET_JSON[] PROGMEM = R"=====({
+  "voltage":%.0f,
+  "current":%.2f,
+  "power":%.0f
 })=====";
