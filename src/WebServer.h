@@ -20,6 +20,7 @@ class WebServer {
         void handle_settings();
         void handle_reset();
         void handle_hard_reset();
+        void handle_logs();
 };
 
 extern WebServer webServer;

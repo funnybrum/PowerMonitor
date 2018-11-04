@@ -1,19 +1,18 @@
 #include "PowerMonitor.h"
 
 void setup()
-{ 
-    Serial.begin(115200);
-    while (! Serial) {
-        delay(1);
-    }
+{
+    logger.begin(LOG_SIZE);
+
     settings.begin();
 
     ScanAndConnect();
 
-    webServer.begin();
-    systemCheck.begin();
+    powerSensor.begin();
     led.begin();
     relay.begin();
+    webServer.begin();
+    systemCheck.begin();
 }
 
 void loop() {
@@ -22,5 +21,7 @@ void loop() {
     systemCheck.loop();
     led.loop();
     relay.loop();
+    logger.loop();
+    powerSensor.loop();
     delay(100);
 }
