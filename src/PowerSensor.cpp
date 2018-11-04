@@ -36,15 +36,15 @@ void PowerSensor::loop() {
             processPacket();
 
             // --- DEBUG LOG START ---
-            if (millis() - last_log > 5000) {
-                String hex_dump = String();
-                for (int i = 0; i < 24; i++) {
-                    hex_dump.concat("0x" + String(data[i],HEX) + " ");
-                }
-                logger.log(hex_dump);
-                logger.log("V:%lu, C:%lu, P:%lu", voltage, current, power);
-                last_log = millis();
-            }
+            // if (millis() - last_log > 5000) {
+            //     String hex_dump = String();
+            //     for (int i = 0; i < 24; i++) {
+            //         hex_dump.concat("0x" + String(data[i],HEX) + " ");
+            //     }
+            //     logger.log(hex_dump);
+            //     logger.log("V:%lu, C:%lu, P:%lu", voltage, current, power);
+            //     last_log = millis();
+            // }
             // --- DEBUG LOG END ---
 
 
@@ -62,17 +62,25 @@ bool PowerSensor::isChecksumCorrect() {
 }
 
 void PowerSensor::processPacket() {
-    // PDF -> 3.7 voltage, current, active power calculation reference flow chart
+    // PDF -> 3.7 voltage, current, active power calculation reference flow
+    // chart. With one mod - ignore data[20], bit 4 in some cases.
+
     if (data[0] == 0x55 ||
         ((data[0] & 0xF0) == 0xF0 && bitRead(data[0], 2) == 0 && bitRead(data[0], 3) == 0)) {
         if (data[1] == 0x5A) {
             if (isChecksumCorrect()) {
-                if (bitRead(data[20], 4)) {
+                if (bitRead(data[20], 4) || (bitRead(data[20], 5) && bitRead(data[20], 6))) {
                     // read the power
                     if ((data[0] & 0xF0) == 0xF0 && bitRead(data[0], 1)) {
                         power = 0;
                     } else {
                         power = GET_COEF_P / GET_CYCLE_P;
+                    }
+
+                    // A bit of optimization for better detection of no load.
+                    // Power being <=2W is considered as no load.
+                    if (power <= 2) {
+                        power = 0;
                     }
                 }
                 
@@ -81,6 +89,8 @@ void PowerSensor::processPacket() {
                     if (power == 0) {
                         current = 0;
                     } else {
+                        // Convert from A to mA. Otherwise we lookse precision
+                        // due to rounding errors.
                         current = 1000 * GET_COEF_C / GET_CYCLE_C;
                     }
                 }
