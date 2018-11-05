@@ -2,7 +2,7 @@
 
 void setup()
 {
-    logger.begin(LOG_SIZE);
+    logger.begin();
 
     settings.begin();
 

@@ -3,11 +3,9 @@
 
 #include "PowerMonitor.h"
 
-// Single log entry.
-struct LogEntry {
-    LogEntry* next;
-    char* msg;
-};
+#ifndef LOG_SIZE
+#define LOG_SIZE 1024
+#endif
 
 /*
  * Logging tool.
@@ -16,17 +14,14 @@ struct LogEntry {
  */
 class Logger {
     public:
-        void begin(unsigned long maxSize);
+        void begin();
         void loop();
-        void log(String msg);
         void log(char* msg);
         void log(const char *format, ...);
-        void getLogs(char* buffer, unsigned long size);
+        const char* getLogs();
     private:
-        unsigned long maxSize;
-        unsigned long size = 0;
-        LogEntry *firstLog = NULL;
-        LogEntry *lastLog = NULL;
+        char buffer[LOG_SIZE];
+        unsigned int pos = 0;
 };
 
 extern Logger logger;

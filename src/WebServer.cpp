@@ -116,9 +116,7 @@ void WebServer::handle_off() {
 
 void WebServer::handle_logs() {
     systemCheck.registerWebCall();
-    char buffer[LOG_SIZE];
-    logger.getLogs(buffer, sizeof(buffer));
-    _server->send(200, "text/html", buffer);
+    _server->send(200, "text/html", logger.getLogs());
 }
 
 WebServer webServer = WebServer(HTTP_PORT);
