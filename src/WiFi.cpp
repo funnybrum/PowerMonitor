@@ -50,7 +50,7 @@ void ScanAndConnect() {
         if (timeout > 0) {
             logger.log("Connected, ip address: %s", WiFi.localIP().toString().c_str());
         } else {
-            logger.log("Failed to connect in 30 seconds. Please, check the provided password.");
+            logger.log("Failed to connect in 30 seconds. Please, check the password.");
         }
     } else {
         logger.log("No known network found...");

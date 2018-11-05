@@ -18,7 +18,7 @@ void PowerSensor::begin() {
     while (! Serial) {
         delay(1);
     }
-    logger.log("HW Serial started.");
+    logger.log("HW Serial started");
 }
 
 void PowerSensor::loop() {

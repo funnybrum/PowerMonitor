@@ -11,10 +11,10 @@ void Settings::begin() {
     // TODO: There are two values used for checksum validation currently. Once all
     // devices are migrated - switch to proper checsum algorithm.
     if (data.checksum == TEMP_CHECKSUM_VAL || data.checksum == TEMP_CHECKSUM_VAL + 1) {
-        logger.log("Settings loaded successfully.");
+        logger.log("Settings loaded successfully");
     } else {
         memset(&this->data, 0, DATA_SIZE);
-        logger.log("Failed to load settings.");
+        logger.log("Failed to load settings");
     }
 }
 
@@ -22,14 +22,14 @@ void Settings::loop() {
 }
 
 void Settings::erase() {
-    logger.log("Erasing EEPROM.");
+    logger.log("Erasing EEPROM");
     memset(&this->data, 0, DATA_SIZE);
     this->data.checksum = 0;
     this->writeToEEPROM();
 }
 
 void Settings::save() {
-    logger.log("Writing state to EEPROM.");
+    logger.log("Writing state to EEPROM");
     this->data.checksum = TEMP_CHECKSUM_VAL;
     this->writeToEEPROM();
 }
