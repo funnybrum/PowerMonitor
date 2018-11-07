@@ -20,6 +20,7 @@ class PowerSensor {
         float getPower_W();
         float getVoltage_V();
         float getCurrent_mA();
+        float getPowerFactor();
 
     private:
         uint8_t data[24];

@@ -42,7 +42,8 @@ void WebServer::handle_get() {
               GET_JSON,
               powerSensor.getVoltage_V(),
               powerSensor.getCurrent_mA(),
-              powerSensor.getPower_W());
+              powerSensor.getPower_W(),
+              powerSensor.getPowerFactor());
     _server->send(200, "application/json", resp);
 }
 
