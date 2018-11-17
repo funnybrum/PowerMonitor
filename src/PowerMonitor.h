@@ -6,16 +6,13 @@
 
 #define LOG_SIZE 256
 
-// Buttons
-#define BUTTON_PIN   D3  //GPIO0
-#define RELAY_PIN    D6  //GPIO12
-#define RED_LED_PIN  D6  //GPIO12
-#define BLUE_LED_PIN D7  //GPIO13
-#define CSE7789_PIN  TX  //U0RXD
+/**
+ * Define one of the following to specify the device type:
+ *   * SONOFF_POW_R2
+ *   * BW_SHP2
+ */
 
-#define CSE77XX_BAUD
-
-#define MIN_TO_MILLIS(mins) (mins * 60L * 1000L)
+#define BW_SHP2
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -30,7 +27,14 @@
 #include "WiFi.h"
 #include "LED.h"
 #include "Relay.h"
-#include "PowerSensor.h"
 #include "Logger.h"
+
+// Koogeek/Blitzwolf SP2 with BL0937
+#define LED_PIN   0
+#define RELAY_PIN 15
+#define SEL_PIN   12
+#define CF1_PIN   14
+#define CF_PIN    5
+#include "SensorBL0937.h"
 
 #endif

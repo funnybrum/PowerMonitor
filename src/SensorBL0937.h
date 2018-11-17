@@ -2,6 +2,7 @@
 #define _POWERSENSOR_H_
 
 #include "PowerMonitor.h"
+#include "HLW8012.h"
 
 /*
  * Driver and user-friendly interface for the CSE7789B sensor. Both the CSE7766
@@ -21,17 +22,15 @@ class PowerSensor {
         float getVoltage_V();
         float getCurrent_mA();
         float getPowerFactor();
-
     private:
-        uint8_t data[24];
-        int pos = 0;
-
         long voltage;
         long current;
         long power;
+        unsigned long lastSwitch;
 
-        bool isChecksumCorrect();
-        void processPacket();
+        static HLW8012 bl0937;
+        static void cfInterrupt();
+        static void cf1Interrupt();
 };
 
 extern PowerSensor powerSensor;

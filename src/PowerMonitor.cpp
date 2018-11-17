@@ -23,5 +23,5 @@ void loop() {
     relay.loop();
     logger.loop();
     powerSensor.loop();
-    delay(100);
+    delay(1000);
 }
