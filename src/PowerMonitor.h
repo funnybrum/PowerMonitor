@@ -21,11 +21,26 @@
 #include "Relay.h"
 #include "Logger.h"
 
-// Sonoff Pow R2 with CSE7789B
-#define RELAY_PIN   D6  //GPIO12
-#define LED_PIN     D7  //GPIO13
-#define CSE7789_PIN TX  //U0RXD
-#include "SensorCSE77xx.h"
-#define MODEL_NAME "Sonoff Pow R2"
+#define KOOGEEK_P1EU
+
+#ifdef SONOFF_POW_R2
+    // Sonoff Pow R2 with CSE7789B
+    #define RELAY_PIN   D6  //GPIO12
+    #define LED_PIN     D7  //GPIO13
+    #define CSE7789_PIN TX  //U0RXD
+    #define MODEL_NAME "Sonoff Pow R2"
+    #include "SensorCSE77xx.h"
+#endif
+
+#ifdef KOOGEEK_P1EU
+    // Koogeek P1EU with BL0937
+    #define LED_PIN   0
+    #define RELAY_PIN 15
+    #define SEL_PIN   12
+    #define CF1_PIN   14
+    #define CF_PIN    5
+    #define MODEL_NAME "Koogeek P1EU"
+    #include "SensorBL0937.h"
+#endif
 
 #endif

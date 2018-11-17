@@ -1,5 +1,7 @@
 #include "PowerMonitor.h"
 
+#ifdef SONOFF_POW_R2
+
 unsigned long last_log = millis();
 
 #define GET_VALUE(index) (unsigned long)(data[index]  << 16 | data[index+1]  << 8 | data[index+2])
@@ -126,3 +128,5 @@ float PowerSensor::getPowerFactor() {
 }
 
 PowerSensor powerSensor = PowerSensor();
+
+#endif

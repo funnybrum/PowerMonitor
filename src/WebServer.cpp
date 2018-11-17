@@ -40,7 +40,6 @@ void WebServer::handle_get() {
     char resp[strlen_P(GET_JSON) + 32];
     sprintf_P(resp,
               GET_JSON,
-              MODEL_NAME,
               powerSensor.getVoltage_V(),
               powerSensor.getCurrent_mA(),
               powerSensor.getPower_W(),
@@ -83,6 +82,7 @@ void WebServer::handle_settings() {
     sprintf_P(
         resp,
         CONFIG_PAGE,
+        MODEL_NAME,
         settings.get()->hostname);
     _server->send(200, "text/html", resp);
 }
