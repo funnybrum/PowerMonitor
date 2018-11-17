@@ -40,6 +40,7 @@ void WebServer::handle_get() {
     char resp[strlen_P(GET_JSON) + 32];
     sprintf_P(resp,
               GET_JSON,
+              MODEL_NAME,
               powerSensor.getVoltage_V(),
               powerSensor.getCurrent_mA(),
               powerSensor.getPower_W(),
