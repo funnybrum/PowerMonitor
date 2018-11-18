@@ -5,6 +5,8 @@
 HLW8012 PowerSensor::bl0937 = HLW8012();
 
 void PowerSensor::begin() {
+    PowerSensorBase::begin();
+
     bl0937.begin(CF_PIN, CF1_PIN, SEL_PIN, LOW);
     bl0937.setResistors(0.001, 2350000, 1000);
     bl0937.setPowerMultiplier(3414290);

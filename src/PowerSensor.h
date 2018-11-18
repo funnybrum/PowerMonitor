@@ -6,7 +6,7 @@
  */
 class PowerSensorBase {
     public:
-        virtual void begin() = 0;
+        virtual void begin();
         virtual void loop() = 0;
 
         float getPower_W();
@@ -17,6 +17,8 @@ class PowerSensorBase {
         void setPowerCorrection(float coef);
         void setCurrentCorrection(float coef);
         void setVoltageCorrection(float coef);
+
+        void loadSettings();
 
     protected:
         long voltage;

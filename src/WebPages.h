@@ -11,6 +11,18 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
       <input type="text" name="hostname" value="%s"><br>
       <small><em>from 4 to 63 characters lenght, can contain chars, digits and '-'</em></small><br>
       <br>
+      Power correction coefficient:<br>
+      <input type="text" name="pcoef" value="%f"><br>
+      <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br>
+      <br>
+      Voltage correction coefficient:<br>
+      <input type="text" name="vcoef" value="%f"><br>
+      <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br>
+      <br>
+      Voltage correction coefficient:<br>
+      <input type="text" name="ccoef" value="%f"><br>
+      <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br>
+      <br>
       <input type="submit" value="Save">
     </form> 	
   </BODY>

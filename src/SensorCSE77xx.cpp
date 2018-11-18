@@ -16,6 +16,8 @@ unsigned long last_log = millis();
 #define GET_CYCLE_P GET_VALUE(17)
 
 void PowerSensor::begin() {
+    PowerSensorBase::begin();
+
     Serial.begin(4800);
     while (! Serial) {
         delay(1);

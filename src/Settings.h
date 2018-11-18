@@ -6,6 +6,9 @@
 struct SettingsData {
     uint8_t checksum;
     char hostname[64];
+    float voltageCoef;
+    float currentCoef;
+    float powerCoef;
 };
 
 #define DATA_SIZE sizeof(SettingsData)

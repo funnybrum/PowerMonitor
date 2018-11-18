@@ -1,5 +1,15 @@
 #include "PowerMonitor.h"
 
+void PowerSensorBase::begin() {
+    loadSettings();
+}
+
+void PowerSensorBase::loadSettings() {
+    cCoef = settings.get()->currentCoef;
+    pCoef = settings.get()->powerCoef;
+    vCoef = settings.get()->voltageCoef;
+}
+
 float PowerSensorBase::getPower_W() {
     return (float)power * pCoef;
 }

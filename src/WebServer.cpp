@@ -73,9 +73,34 @@ void WebServer::handle_settings() {
         }
     }
 
+    if (_server->hasArg("pcoef")) {
+        float pcoef = atof(_server->arg("pcoef").c_str());
+        if (0.8 <= pcoef && pcoef <= 1.2) {
+            settings.get()->powerCoef = pcoef;
+            save = true;
+        }
+    }
+
+    if (_server->hasArg("vcoef")) {
+        float vcoef = atof(_server->arg("vcoef").c_str());
+        if (0.8 <= vcoef && vcoef <= 1.2) {
+            settings.get()->voltageCoef = vcoef;
+            save = true;
+        }
+    }
+
+    if (_server->hasArg("ccoef")) {
+        float ccoef = atof(_server->arg("ccoef").c_str());
+        if (0.8 <= ccoef && ccoef <= 1.2) {
+            settings.get()->currentCoef = ccoef;
+            save = true;
+        }
+    }
+
     if (save) {
         logger.log("Settings updated.");
         settings.save();
+        powerSensor.loadSettings();
     }
 
     char resp[strlen_P(CONFIG_PAGE) + 128];
@@ -83,7 +108,10 @@ void WebServer::handle_settings() {
         resp,
         CONFIG_PAGE,
         MODEL_NAME,
-        settings.get()->hostname);
+        settings.get()->hostname,
+        settings.get()->powerCoef,
+        settings.get()->voltageCoef,
+        settings.get()->currentCoef);
     _server->send(200, "text/html", resp);
 }
 
