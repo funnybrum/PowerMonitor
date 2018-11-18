@@ -14,6 +14,9 @@ void Settings::begin() {
         logger.log("Settings loaded successfully");
     } else {
         memset(&this->data, 0, DATA_SIZE);
+        this->data.powerCoef = 1.0f;
+        this->data.voltageCoef = 1.0f;
+        this->data.currentCoef = 1.0f;
         logger.log("Failed to load settings");
     }
 }
