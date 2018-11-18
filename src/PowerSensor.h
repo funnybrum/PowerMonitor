@@ -11,7 +11,7 @@ class PowerSensorBase {
 
         float getPower_W();
         float getVoltage_V();
-        float getCurrent_mA();
+        float getCurrent_A();
         float getPowerFactor();
 
         void setPowerCorrection(float coef);

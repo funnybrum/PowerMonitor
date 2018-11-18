@@ -4,7 +4,10 @@
 #define HTTP_PORT 80
 #define HOSTNAME "power-monitor"
 
-#define LOG_SIZE 256
+#define LOG_SIZE 1024
+
+#define DEFAULT_RELAY_STATE on
+// #define DEFAULT_RELAY_STATE off
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -22,8 +25,8 @@
 #include "Logger.h"
 #include "PowerSensor.h"
 
-#define KOOGEEK_P1EU
-// #define SONOFF_POW_R2
+#define SONOFF_POW_R2
+// #define KOOGEEK_P1EU
 
 #ifdef SONOFF_POW_R2
     // Sonoff Pow R2 with CSE7789B

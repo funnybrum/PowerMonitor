@@ -15,6 +15,7 @@ void ScanAndConnect() {
     for (int i = 0; i < networks; i++) {
         int signalStrength = WiFi.RSSI(i);
         String ssid = WiFi.SSID(i);
+        logger.log("Found %s (%ddBm)", ssid.c_str(), signalStrength);
         if (strongestSignalStrength < signalStrength) {
             for (unsigned int j = 0; j < sizeof(WIFI_SSIDs)/sizeof(WIFI_SSIDs[0]); j++) {
                 if (ssid.equals(WIFI_SSIDs[j])) {
@@ -25,16 +26,17 @@ void ScanAndConnect() {
         }
     }
 
+    const char* hostname;
+    
+    if (strlen(settings.get()->hostname) > 1) {
+        hostname = settings.get()->hostname;    
+    } else {
+        hostname = HOSTNAME;
+    }
+
     if (strongestSSID.compareTo("") != 0) {
         logger.log("Connectiong to %s (%ddBm)", strongestSSID.c_str(), strongestSignalStrength);
 
-        const char* hostname;
-        
-        if (strlen(settings.get()->hostname) > 1) {
-            hostname = settings.get()->hostname;    
-        } else {
-            hostname = HOSTNAME;
-        }
         logger.log("Hostname is %s", hostname);
 
         WiFi.hostname(hostname);
@@ -44,7 +46,7 @@ void ScanAndConnect() {
         int timeout = 60; // 60 * 0.5 = 30 seconds. 
         while (WiFi.status() != WL_CONNECTED and timeout > 0) {
             timeout--;
-            delay(100);
+            delay(500);
         }
 
         if (timeout > 0) {
@@ -53,7 +55,14 @@ void ScanAndConnect() {
             logger.log("Failed to connect in 30 seconds. Please, check the password.");
         }
     } else {
-        logger.log("No known network found...");
+        logger.log("No known network found. Switching to access point.");
+
+        // For debug purposes - switch to access mode.
+        WiFi.softAPConfig(
+            IPAddress(192, 168, 0, 1),
+            IPAddress(192, 168, 0, 1),
+            IPAddress(255, 255, 255, 0));
+        WiFi.softAP(hostname);
     }
 
     WiFi.scanDelete();

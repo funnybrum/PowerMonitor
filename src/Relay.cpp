@@ -2,7 +2,7 @@
 
 void Relay::begin() {
     pinMode(RELAY_PIN, OUTPUT);
-    off();
+    DEFAULT_RELAY_STATE();
 }
 
 void Relay::loop() {

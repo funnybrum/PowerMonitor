@@ -6,12 +6,11 @@ void LED::begin() {
 }
 
 void LED::loop() {
-    if ((millis()/1000)%2 == 0) {
-        analogWrite(LED_PIN, 1023);
-    } else {
-        analogWrite(LED_PIN, 0);
-    }
-
+    // if ((millis()/1000)%2 == 0) {
+    //     analogWrite(LED_PIN, 1023);
+    // } else {
+    //     analogWrite(LED_PIN, 0);
+    // }
 }
 
 void LED::blink() {

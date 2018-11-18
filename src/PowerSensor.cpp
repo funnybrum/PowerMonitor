@@ -18,16 +18,21 @@ float PowerSensorBase::getVoltage_V() {
     return (float)voltage * vCoef;
 }
 
-float PowerSensorBase::getCurrent_mA() {
+float PowerSensorBase::getCurrent_A() {
     return ((float)current) * cCoef / 1000.0;
 }
 
 float PowerSensorBase::getPowerFactor() {
-    long apperantPowermW = voltage * current;
-    float powerFactor = 1000.0f * power / apperantPowermW;
+    float apperantPower = getVoltage_V() * getCurrent_A();
+    float powerFactor = getPower_W() / apperantPower;
     if (powerFactor > 1.0f) {
         powerFactor = 1.0f;
     }
+
+    if (isnan(powerFactor)) {
+        return 0.0f;
+    }
+
     return powerFactor;
 }
 

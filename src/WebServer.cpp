@@ -41,7 +41,7 @@ void WebServer::handle_get() {
     sprintf_P(resp,
               GET_JSON,
               powerSensor.getVoltage_V(),
-              powerSensor.getCurrent_mA(),
+              powerSensor.getCurrent_A(),
               powerSensor.getPower_W(),
               powerSensor.getPowerFactor());
     _server->send(200, "application/json", resp);
