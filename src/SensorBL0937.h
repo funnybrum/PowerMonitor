@@ -14,23 +14,16 @@
  * 
  * Based on the CSE7766.pdf that can be found in the docs folder.
  */
-class PowerSensor {
+class PowerSensor : public PowerSensorBase {
     public:
-        void begin();
-        void loop();
-        float getPower_W();
-        float getVoltage_V();
-        float getCurrent_mA();
-        float getPowerFactor();
-    private:
-        long voltage;
-        long current;
-        long power;
-        unsigned long lastSwitch;
+        virtual void begin();
+        virtual void loop();
 
-        static HLW8012 bl0937;
+    private:
         static void cfInterrupt();
         static void cf1Interrupt();
+        static HLW8012 bl0937;
+        unsigned long lastSwitch;
 };
 
 extern PowerSensor powerSensor;

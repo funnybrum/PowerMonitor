@@ -20,8 +20,10 @@
 #include "LED.h"
 #include "Relay.h"
 #include "Logger.h"
+#include "PowerSensor.h"
 
 #define KOOGEEK_P1EU
+// #define SONOFF_POW_R2
 
 #ifdef SONOFF_POW_R2
     // Sonoff Pow R2 with CSE7789B

@@ -106,27 +106,6 @@ void PowerSensor::processPacket() {
     }
 }
 
-float PowerSensor::getPower_W() {
-    return (float)power;
-}
-
-float PowerSensor::getVoltage_V() {
-    return (float)voltage;
-}
-
-float PowerSensor::getCurrent_mA() {
-    return ((float)current) / 1000.0;
-}
-
-float PowerSensor::getPowerFactor() {
-    long apperantPowermW = voltage * current;
-    float powerFactor = 1000.0f * power / apperantPowermW;
-    if (powerFactor > 1.0f) {
-        powerFactor = 1.0f;
-    }
-    return powerFactor;
-}
-
 PowerSensor powerSensor = PowerSensor();
 
 #endif

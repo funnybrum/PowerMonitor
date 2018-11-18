@@ -13,25 +13,17 @@
  * 
  * Based on the CSE7766.pdf that can be found in the docs folder.
  */
-class PowerSensor {
+class PowerSensor : public PowerSensorBase {
     public:
-        void begin();
-        void loop();
-        float getPower_W();
-        float getVoltage_V();
-        float getCurrent_mA();
-        float getPowerFactor();
+        virtual void begin();
+        virtual void loop();
 
     private:
-        uint8_t data[24];
-        int pos = 0;
-
-        long voltage;
-        long current;
-        long power;
-
         bool isChecksumCorrect();
         void processPacket();
+
+        uint8_t data[24];
+        int pos = 0;
 };
 
 extern PowerSensor powerSensor;
