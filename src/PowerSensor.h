@@ -1,6 +1,12 @@
 #ifndef _POWERSENSORBASE_H_
 #define _POWERSENSORBASE_H_
 
+struct PowerSensorSettings {
+    float voltageCoef;
+    float currentCoef;
+    float powerCoef;
+};
+
 /*
  * Common power sensor interface.
  */

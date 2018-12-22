@@ -18,12 +18,19 @@
 
 #include "Settings.h"
 #include "SystemCheck.h"
-#include "WebServer.h"
 #include "WiFi.h"
+#include "Logger.h"
+#include "InfluxDBCollector.h"
+#include "WebServer.h"
 #include "LED.h"
 #include "Relay.h"
-#include "Logger.h"
 #include "PowerSensor.h"
+
+struct SettingsData {
+    NetworkSettings network;
+    InfluxDBCollectorSettings influxDB;
+    PowerSensorSettings sensor;
+};
 
 #define SONOFF_POW_R2
 // #define KOOGEEK_P1EU
@@ -47,5 +54,12 @@
     #define MODEL_NAME "Koogeek P1EU"
     #include "SensorBL0937.h"
 #endif
+
+extern Logger logger;
+extern Settings settings;
+extern SettingsData settingsData;
+extern WiFiManager wifi;
+extern SystemCheck systemCheck;
+extern InfluxDBCollector telemetryCollector;
 
 #endif

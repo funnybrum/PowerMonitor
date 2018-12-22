@@ -6,7 +6,15 @@ Custom firmware for the following smart plugs:
  * Koogeek P1EU
 
 ## Compiling
-Choose the proper hardware to be flashed - KOOGEEK_P1EU or SONOFF_POW_R2. Apply changes for the following two files:
+
+The project requires additional lib that can be retrieved from another github repo:
+
+```
+cd lib
+git clone git@github.com:funnybrum/esp8266-base.git
+```
+
+After that choose the proper hardware to be flashed - KOOGEEK_P1EU or SONOFF_POW_R2. Apply changes for the following two files:
  * PowerMonitor.h - define the hardware.
  * platformio.ini - choose the proper plaform.
 

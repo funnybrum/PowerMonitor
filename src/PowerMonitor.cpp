@@ -1,27 +1,60 @@
 #include "PowerMonitor.h"
 
+
+void initSettings() {
+    strcpy(settingsData.network.hostname, HOSTNAME);
+    settingsData.sensor.currentCoef = 1.0f;
+    settingsData.sensor.powerCoef = 1.0f;
+    settingsData.sensor.voltageCoef = 1.0f;
+}
+
+void collectData(InfluxDBCollector* collector) {
+    collector->append("power", powerSensor.getPower_W(), 1);
+    collector->append("current", powerSensor.getCurrent_A(), 2);
+    collector->append("voltage", powerSensor.getVoltage_V(), 1);
+    collector->append("power_factor", powerSensor.getPowerFactor(), 2);
+    collector->append("free_heap", ESP.getFreeHeap());
+}
+
+SettingsData settingsData = SettingsData();
+Logger logger = Logger(false);
+SystemCheck systemCheck = SystemCheck(&logger);
+Settings settings = Settings(&logger, (void*)(&settingsData), sizeof(SettingsData), initSettings);
+WiFiManager wifi = WiFiManager(&logger, &settingsData.network);
+InfluxDBCollector telemetryCollector = InfluxDBCollector(
+    &logger, &wifi, &settingsData.influxDB, &settingsData.network, collectData);
+
+WebServer webServer = WebServer(&settingsData.network, &logger, &systemCheck);
+
 void setup()
 {
     logger.begin();
-
     settings.begin();
-
-    ScanAndConnect();
-
+    wifi.begin();
     powerSensor.begin();
     led.begin();
     relay.begin();
     webServer.begin();
-    systemCheck.begin();
+
+    wifi.connect();
 }
 
 void loop() {
-    webServer.loop();
+    logger.loop();
     settings.loop();
-    systemCheck.loop();
+    wifi.loop();
+    powerSensor.loop();
     led.loop();
     relay.loop();
-    logger.loop();
-    powerSensor.loop();
+    webServer.loop();
+
+    if (settingsData.influxDB.enable) {
+        systemCheck.stop();
+        telemetryCollector.start();
+    } else {
+        telemetryCollector.stop();
+        systemCheck.start();
+    }
+
     delay(100);
 }

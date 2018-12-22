@@ -5,9 +5,9 @@ void PowerSensorBase::begin() {
 }
 
 void PowerSensorBase::loadSettings() {
-    cCoef = settings.get()->currentCoef;
-    pCoef = settings.get()->powerCoef;
-    vCoef = settings.get()->voltageCoef;
+    cCoef = settingsData.sensor.currentCoef;
+    pCoef = settingsData.sensor.powerCoef;
+    vCoef = settingsData.sensor.voltageCoef;
 }
 
 float PowerSensorBase::getPower_W() {

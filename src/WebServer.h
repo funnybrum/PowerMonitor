@@ -2,27 +2,19 @@
 #define _WEBSERVER_H_
 
 #include "PowerMonitor.h"
+#include "WebServerBase.h"
 #include "WebPages.h"
 
-class WebServer {
+class WebServer: public WebServerBase {
     public:
-        WebServer(int port);
-        void begin();
-        void loop();
-    private:
-        ESP8266WebServer *_server;
-        ESP8266HTTPUpdateServer *_httpUpdater;
-
+        WebServer(NetworkSettings* networkSettings, Logger* logger, SystemCheck* systemCheck);
+        void registerHandlers();
         void handle_root();
         void handle_get();
         void handle_on();
         void handle_off();
         void handle_settings();
         void handle_reset();
-        void handle_hard_reset();
-        void handle_logs();
 };
-
-extern WebServer webServer;
 
 #endif
