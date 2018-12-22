@@ -16,10 +16,10 @@ void collectData(InfluxDBCollector* collector) {
     collector->append("free_heap", ESP.getFreeHeap());
 }
 
-SettingsData settingsData = SettingsData();
 Logger logger = Logger(false);
-SystemCheck systemCheck = SystemCheck(&logger);
+SettingsData settingsData = SettingsData();
 Settings settings = Settings(&logger, (void*)(&settingsData), sizeof(SettingsData), initSettings);
+SystemCheck systemCheck = SystemCheck(&logger);
 WiFiManager wifi = WiFiManager(&logger, &settingsData.network);
 InfluxDBCollector telemetryCollector = InfluxDBCollector(
     &logger, &wifi, &settingsData.influxDB, &settingsData.network, collectData);
@@ -30,11 +30,14 @@ void setup()
 {
     logger.begin();
     settings.begin();
+    systemCheck.begin();
     wifi.begin();
+    telemetryCollector.begin();
+    webServer.begin();
+
     powerSensor.begin();
     led.begin();
     relay.begin();
-    webServer.begin();
 
     wifi.connect();
 }
@@ -42,11 +45,14 @@ void setup()
 void loop() {
     logger.loop();
     settings.loop();
+    systemCheck.loop();
     wifi.loop();
+    telemetryCollector.loop();
+    webServer.loop();
+
     powerSensor.loop();
     led.loop();
     relay.loop();
-    webServer.loop();
 
     if (settingsData.influxDB.enable) {
         systemCheck.stop();
