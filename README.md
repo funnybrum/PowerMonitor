@@ -18,11 +18,13 @@ After that choose the proper hardware to be flashed - KOOGEEK_P1EU or SONOFF_POW
  * PowerMonitor.h - define the hardware.
  * platformio.ini - choose the proper plaform.
 
-The Sonoff Pow R2 uses ESP8266 with 4MB flash and the Koogeek P1EU uses ESP8266 (I think) with 1MB flash.
+The Sonoff Pow R2 uses ESP8266 with 4MB flash and the Koogeek P1EU uses ESP8258 with 1MB flash.
 
 Initial flashing should be done with USB to 3.3V serial adapter. Check the following pages for details for flashing the devices:
  * [Sonoff POW R2](https://github.com/xoseperez/espurna/wiki/Hardware-Itead-Sonoff-POW-R2)
  * [Koogeek P1EU]](https://github.com/xoseperez/espurna/wiki/Hardware-BLITZWOLF-BW-SHP2)
+ * [Koogeek P1EU v2.3]](https://github.com/arendst/Sonoff-Tasmota/issues/4303)
+
 
 ## Over-the-air programming
 

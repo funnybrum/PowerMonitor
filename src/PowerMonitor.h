@@ -32,8 +32,10 @@ struct SettingsData {
     PowerSensorSettings sensor;
 };
 
-#define SONOFF_POW_R2
+// #define SONOFF_POW_R2
 // #define KOOGEEK_P1EU
+#define KOOGEEK_P1EU_V23
+
 
 #ifdef SONOFF_POW_R2
     // Sonoff Pow R2 with CSE7789B
@@ -54,6 +56,18 @@ struct SettingsData {
     #define MODEL_NAME "Koogeek P1EU"
     #include "SensorBL0937.h"
 #endif
+
+#ifdef KOOGEEK_P1EU_V23
+    // Koogeek P1EU with BL0937
+    #define LED_PIN   13
+    #define RELAY_PIN 14
+    #define SEL_PIN   12
+    #define CF1_PIN   5
+    #define CF_PIN    4
+    #define MODEL_NAME "Koogeek P1EU v2.3"
+    #include "SensorBL0937.h"
+#endif
+
 
 extern Logger logger;
 extern Settings settings;

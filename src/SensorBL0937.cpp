@@ -1,6 +1,6 @@
 #include "PowerMonitor.h"
 
-#ifdef KOOGEEK_P1EU
+#if defined(KOOGEEK_P1EU) || defined(KOOGEEK_P1EU_V23)
 
 HLW8012 PowerSensor::bl0937 = HLW8012();
 
