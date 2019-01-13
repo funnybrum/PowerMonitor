@@ -25,6 +25,7 @@
 #include "LED.h"
 #include "Relay.h"
 #include "PowerSensor.h"
+#include "Button.h"
 
 struct SettingsData {
     NetworkSettings network;
@@ -39,9 +40,10 @@ struct SettingsData {
 
 #ifdef SONOFF_POW_R2
     // Sonoff Pow R2 with CSE7789B
-    #define RELAY_PIN   D6  //GPIO12
-    #define LED_PIN     D7  //GPIO13
-    #define CSE7789_PIN TX  //U0RXD
+    #define RELAY_PIN   12  //GPIO12
+    #define LED_PIN     13  //GPIO13
+    #define CSE7789_PIN 1   //U0RXD
+    #define BUTTON_PIN  0   // default is HIGH
     #define MODEL_NAME "Sonoff Pow R2"
     #include "SensorCSE77xx.h"
 #endif
@@ -49,21 +51,25 @@ struct SettingsData {
 #ifdef KOOGEEK_P1EU
     // Koogeek P1EU with BL0937
     #define LED_PIN   0
+    #define LED2_PIN  2
     #define RELAY_PIN 15
     #define SEL_PIN   12
     #define CF1_PIN   14
     #define CF_PIN    5
     #define MODEL_NAME "Koogeek P1EU"
+    #define BUTTON_PIN 13   // default is HIGH
     #include "SensorBL0937.h"
 #endif
 
 #ifdef KOOGEEK_P1EU_V23
     // Koogeek P1EU with BL0937
-    #define LED_PIN   13
-    #define RELAY_PIN 14
-    #define SEL_PIN   12
-    #define CF1_PIN   5
-    #define CF_PIN    4
+    #define LED_PIN    13
+    #define LED2_PIN   1
+    #define RELAY_PIN  14
+    #define SEL_PIN    12
+    #define CF1_PIN    5
+    #define CF_PIN     4
+    #define BUTTON_PIN 3    // default is HIGH
     #define MODEL_NAME "Koogeek P1EU v2.3"
     #include "SensorBL0937.h"
 #endif

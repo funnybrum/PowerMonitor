@@ -23,7 +23,6 @@ void PowerSensor::loop() {
         power = bl0937.getActivePower();
         voltage = bl0937.getVoltage();
         current = bl0937.getCurrent() * 1000;
-        // bl0937.toggleMode();
         lastSwitch = millis();
     }
 }
