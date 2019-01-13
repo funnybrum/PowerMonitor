@@ -13,6 +13,7 @@ void WebServer::registerHandlers() {
     server->on("/off", std::bind(&WebServer::handle_off, this));
     server->on("/settings", std::bind(&WebServer::handle_settings, this));
     server->on("/reset", std::bind(&WebServer::handle_reset, this));
+    server->on("/blink", std::bind(&WebServer::handle_blink, this));
 }
 
 void WebServer::handle_root() {
@@ -89,4 +90,10 @@ void WebServer::handle_off() {
     systemCheck->registerWebCall();
     server->send(200);
     relay.off();
+}
+
+void WebServer::handle_blink() {
+    systemCheck->registerWebCall();
+    server->send(200);
+    led.blink();
 }

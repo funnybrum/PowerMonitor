@@ -7,10 +7,10 @@ class Button {
     public:
         void begin();
         void loop();
-    private:
-        static void onClick();
         static unsigned long _lastClick;
         static unsigned short _clickCount;
+    private:
+        static void onClick();
 };
 
 extern Button button;

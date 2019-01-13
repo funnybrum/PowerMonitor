@@ -15,6 +15,7 @@ class WebServer: public WebServerBase {
         void handle_off();
         void handle_settings();
         void handle_reset();
+        void handle_blink();
 };
 
 #endif

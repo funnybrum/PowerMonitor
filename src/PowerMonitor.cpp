@@ -38,6 +38,7 @@ void setup()
     powerSensor.begin();
     led.begin();
     relay.begin();
+    button.begin();
 
     wifi.connect();
 }
@@ -53,6 +54,7 @@ void loop() {
     powerSensor.loop();
     led.loop();
     relay.loop();
+    button.loop();
 
     if (settingsData.influxDB.enable) {
         systemCheck.stop();

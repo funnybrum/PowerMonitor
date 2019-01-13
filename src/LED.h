@@ -8,6 +8,7 @@ class LED {
         void begin();
         void loop();
         void blink();
+        void blink2();
     private:
         unsigned long _lastBlink = 0;
         unsigned long _lastUpdate = 0;
