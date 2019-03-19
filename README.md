@@ -11,7 +11,7 @@ The project requires additional lib that should be retrieved from another github
 
 ```
 cd lib
-git clone git@github.com:funnybrum/esp8266-base.git
+git clone https://github.com/funnybrum/esp8266-base.git
 ```
 
 After that choose the proper hardware to be flashed - KOOGEEK_P1EU or SONOFF_POW_R2. Apply changes for the following two files:
