@@ -9,6 +9,9 @@ class Relay {
         void loop();
         void off();
         void on();
+        bool isOn();
+    private:
+        bool relayIsOn = false;
 };
 
 extern Relay relay;

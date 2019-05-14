@@ -26,6 +26,7 @@ void PowerSensor::begin() {
 }
 
 void PowerSensor::loop() {
+    PowerSensorBase::loop();
     while (Serial.available() > 0) {
         data[pos] = Serial.read();
         if (pos == 1 && data[1] != 0x5A) {

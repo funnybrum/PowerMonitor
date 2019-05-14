@@ -18,6 +18,11 @@ void Button::loop() {
         }
         // Custom actions can be taken based on the number of clicks. For now - just one action.
         wifi.connect();
+        if (relay.isOn()) {
+            relay.off();
+        } else {
+            relay.on();
+        }
         _clickCount = 0;
     }
 }

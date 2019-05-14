@@ -19,6 +19,7 @@ void PowerSensor::begin() {
 }
 
 void PowerSensor::loop() {
+    PowerSensorBase::loop();
     if (millis() - lastSwitch > 1000) {
         power = bl0937.getActivePower();
         voltage = bl0937.getVoltage();

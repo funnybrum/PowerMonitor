@@ -31,7 +31,8 @@ void WebServer::handle_get() {
               powerSensor.getVoltage_V(),
               powerSensor.getCurrent_A(),
               powerSensor.getPower_W(),
-              powerSensor.getPowerFactor());
+              powerSensor.getPowerFactor(),
+              powerSensor.getAveragePower60s());
     server->send(200, "application/json", resp);
 }
 
@@ -81,14 +82,18 @@ void WebServer::handle_reset() {
 void WebServer::handle_on() {
     logger->log("/on");
     systemCheck->registerWebCall();
-    server->send(200);
+    char buf[64];
+    sprintf(buf, "Current ts: %lu, hour is %lu", telemetryCollector.getTimestamp(), (telemetryCollector.getTimestamp() % (60 * 60 * 24)) / 3600);
+    server->send(200, "text/plain", buf);
     relay.on();
 }
 
 void WebServer::handle_off() {
     logger->log("/off");
     systemCheck->registerWebCall();
-    server->send(200);
+    char buf[64];
+    sprintf(buf, "Current ts: %lu, hour is %lu", telemetryCollector.getTimestamp(), (telemetryCollector.getTimestamp() % (60 * 60 * 24)) / 3600);
+    server->send(200, "text/plain", buf);
     relay.off();
 }
 

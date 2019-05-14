@@ -36,5 +36,6 @@ const char GET_JSON[] PROGMEM = R"=====({
   "voltage":%.1f,
   "current":%.2f,
   "power":%.1f,
-  "power_factor": %.2f
+  "power_factor": %.2f,
+  "avg_power_60s":%.1f
 })=====";
