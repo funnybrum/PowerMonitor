@@ -70,7 +70,7 @@ void loop() {
         // Do the check every 15 minutes.
         if (secondsAfterMidnight % 900 < 10) {
             // GMT + 3, so the below one is ON from 9:00 to 16:00
-            if (hour >= 6 && hour <= 12) {
+            if (hour >= 5 && hour <= 15) {
                 if (relay.isOn() == false) {
                     relay.on();
                 }
