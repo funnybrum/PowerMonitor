@@ -1,4 +1,4 @@
-#define PROGMEM ICACHE_RODATA_ATTR
+#include "PowerMonitor.h"
 
 const char CONFIG_PAGE[] PROGMEM = R"=====(
 <HTML>
@@ -9,18 +9,7 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
     <form action="/settings" method="get">
       %s<br><br>
       %s<br><br>
-      <fieldset style='display: inline-block; width: 300px'>
-        <legend>Power sensor settings</legend>
-        Power correction coefficient:<br> 
-        <input type="text" name="pcoef" value="%f"><br>
-        <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
-        Voltage correction coefficient:<br>
-        <input type="text" name="vcoef" value="%f"><br>
-        <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
-        Voltage correction coefficient:<br>
-        <input type="text" name="ccoef" value="%f"><br>
-        <small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
-      </fieldset>
+      %s<br><br>
       <br><br>
       <input type="submit" value="Save" style='width: 150px;'>
       &nbsp;&nbsp;&nbsp;

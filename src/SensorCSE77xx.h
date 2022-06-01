@@ -26,6 +26,4 @@ class PowerSensor : public PowerSensorBase {
         int pos = 0;
 };
 
-extern PowerSensor powerSensor;
-
 #endif

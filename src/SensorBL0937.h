@@ -26,6 +26,4 @@ class PowerSensor : public PowerSensorBase {
         unsigned long lastSwitch;
 };
 
-extern PowerSensor powerSensor;
-
 #endif

@@ -11,6 +11,4 @@ class Relay {
         void on();
 };
 
-extern Relay relay;
-
 #endif

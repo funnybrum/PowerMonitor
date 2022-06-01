@@ -31,5 +31,3 @@ void LED::blink2() {
     analogWrite(LED2_PIN, 1023);
 #endif
 }
-
-LED led = LED();

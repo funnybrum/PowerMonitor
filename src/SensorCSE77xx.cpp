@@ -108,6 +108,4 @@ void PowerSensor::processPacket() {
     }
 }
 
-PowerSensor powerSensor = PowerSensor();
-
 #endif

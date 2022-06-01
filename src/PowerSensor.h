@@ -1,6 +1,23 @@
 #ifndef _POWERSENSORBASE_H_
 #define _POWERSENSORBASE_H_
 
+#include "WebServerBase.h"
+
+const char POWER_SENSOR_CONFIG_PAGE[] PROGMEM = R"=====(
+<fieldset style='display: inline-block; width: 300px'>
+<legend>Power sensor settings</legend>
+Power correction coefficient:<br> 
+<input type="text" name="pcoef" value="%f"><br>
+<small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
+Voltage correction coefficient:<br>
+<input type="text" name="vcoef" value="%f"><br>
+<small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
+Voltage correction coefficient:<br>
+<input type="text" name="ccoef" value="%f"><br>
+<small><em>1.00 for no correction, [0.8, 1.2]</em></small><br><br>
+</fieldset>
+)=====";
+
 struct PowerSensorSettings {
     float voltageCoef;
     float currentCoef;
@@ -20,21 +37,12 @@ class PowerSensorBase {
         float getCurrent_A();
         float getPowerFactor();
 
-        void setPowerCorrection(float coef);
-        void setCurrentCorrection(float coef);
-        void setVoltageCorrection(float coef);
-
-        void loadSettings();
-
+        void get_config_page(char* buffer);
+        void parse_config_params(WebServerBase* webServer);
     protected:
         long voltage;
         long current;
         long power;
-        
-    private:
-        float vCoef = 1.0f;
-        float cCoef = 1.0f;
-        float pCoef = 1.0f;
 };
 
 #endif

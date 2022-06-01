@@ -1,25 +1,18 @@
 #include "PowerMonitor.h"
 
 void PowerSensorBase::begin() {
-    loadSettings();
-}
-
-void PowerSensorBase::loadSettings() {
-    cCoef = settingsData.sensor.currentCoef;
-    pCoef = settingsData.sensor.powerCoef;
-    vCoef = settingsData.sensor.voltageCoef;
 }
 
 float PowerSensorBase::getPower_W() {
-    return (float)power * pCoef;
+    return (float)power * settings.getSettings()->sensor.powerCoef;
 }
 
 float PowerSensorBase::getVoltage_V() {
-    return (float)voltage * vCoef;
+    return (float)voltage * settings.getSettings()->sensor.voltageCoef;
 }
 
 float PowerSensorBase::getCurrent_A() {
-    return ((float)current) * cCoef / 1000.0;
+    return ((float)current) * settings.getSettings()->sensor.currentCoef / 1000.0;
 }
 
 float PowerSensorBase::getPowerFactor() {
@@ -36,14 +29,17 @@ float PowerSensorBase::getPowerFactor() {
     return powerFactor;
 }
 
-void PowerSensorBase::setCurrentCorrection(float coef) {
-    cCoef = coef;
+void PowerSensorBase::get_config_page(char* buffer) {
+    sprintf_P(
+        buffer,
+        POWER_SENSOR_CONFIG_PAGE,
+        settings.getSettings()->sensor.powerCoef,
+        settings.getSettings()->sensor.voltageCoef,
+        settings.getSettings()->sensor.currentCoef);
 }
 
-void PowerSensorBase::setVoltageCorrection(float coef) {
-    vCoef = coef;
-}
-
-void PowerSensorBase::setPowerCorrection(float coef) {
-    pCoef = coef;
+void PowerSensorBase::parse_config_params(WebServerBase* webServer) {
+    webServer->process_setting("pcoef", settings.getSettings()->sensor.powerCoef);
+    webServer->process_setting("vcoef", settings.getSettings()->sensor.voltageCoef);
+    webServer->process_setting("ccoef", settings.getSettings()->sensor.currentCoef);
 }

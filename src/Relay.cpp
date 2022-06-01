@@ -15,5 +15,3 @@ void Relay::on() {
 void Relay::off() {
     digitalWrite(RELAY_PIN, LOW);
 }
-
-Relay relay = Relay();

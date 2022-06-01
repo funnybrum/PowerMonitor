@@ -35,6 +35,4 @@ void ICACHE_RAM_ATTR PowerSensor::cf1Interrupt() {
     bl0937.cf1_interrupt();
 }
 
-PowerSensor powerSensor = PowerSensor();
-
 #endif

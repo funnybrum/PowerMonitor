@@ -16,22 +16,13 @@
 
 #include "user_interface.h"
 
-#include "Settings.h"
-#include "SystemCheck.h"
-#include "WiFi.h"
-#include "Logger.h"
-#include "InfluxDBCollector.h"
-#include "WebServer.h"
+#include "esp8266-base.h"
+
 #include "LED.h"
 #include "Relay.h"
 #include "PowerSensor.h"
 #include "Button.h"
-
-struct SettingsData {
-    NetworkSettings network;
-    InfluxDBCollectorSettings influxDB;
-    PowerSensorSettings sensor;
-};
+#include "DataCollector.h"
 
 // #define SONOFF_POW_R2
 // #define KOOGEEK_P1EU
@@ -77,9 +68,11 @@ struct SettingsData {
 
 extern Logger logger;
 extern Settings settings;
-extern SettingsData settingsData;
 extern WiFiManager wifi;
-extern SystemCheck systemCheck;
-extern InfluxDBCollector telemetryCollector;
+extern DataCollector telemetryCollector;
+
+extern PowerSensor powerSensor;
+extern LED led;
+extern Relay relay;
 
 #endif

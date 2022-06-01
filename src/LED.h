@@ -14,6 +14,4 @@ class LED {
         unsigned long _lastUpdate = 0;
 };
 
-extern LED led;
-
 #endif
