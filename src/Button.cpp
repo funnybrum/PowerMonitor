@@ -1,6 +1,5 @@
 #include "PowerMonitor.h"
 
-Button button = Button();
 unsigned short Button::_clickCount = 0;
 unsigned long Button::_lastClick = 0;
 

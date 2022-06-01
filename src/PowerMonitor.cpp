@@ -9,6 +9,7 @@ WebServer webServer = WebServer(&logger, &settings.getSettings()->network);
 PowerSensor powerSensor = PowerSensor();
 Relay relay = Relay();
 LED led = LED();
+Button button = Button();
 
 void setup()
 {

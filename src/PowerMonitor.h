@@ -74,5 +74,6 @@ extern DataCollector telemetryCollector;
 extern PowerSensor powerSensor;
 extern LED led;
 extern Relay relay;
+extern Button button;
 
 #endif
