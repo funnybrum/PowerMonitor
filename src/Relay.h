@@ -8,7 +8,10 @@ class Relay {
         void begin();
         void loop();
         void off();
-        void on();
+        // durationSeconds = 0 - indefinite, != 0 - keep the relay ON only for the specified seconds
+        void on(uint16_t durationSeconds);
+    private:
+        uint32_t turnOffAt = 0;
 };
 
 #endif

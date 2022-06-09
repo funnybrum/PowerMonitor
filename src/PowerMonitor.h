@@ -25,8 +25,8 @@
 #include "DataCollector.h"
 
 // #define SONOFF_POW_R2
-// #define KOOGEEK_P1EU
-#define KOOGEEK_P1EU_V23
+#define KOOGEEK_P1EU
+// #define KOOGEEK_P1EU_V23
 
 
 #ifdef SONOFF_POW_R2

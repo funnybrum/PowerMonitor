@@ -57,9 +57,13 @@ void WebServer::handle_settings() {
 }
 
 void WebServer::handle_on() {
+    uint16_t duration = 0;
+    if (server->args() == 1 && server->argName(0).equals("duration")) {
+        duration = atoi(server->arg(0).c_str());
+    }
     logger->log("/on");
     server->send(200);
-    relay.on();
+    relay.on(duration);
 }
 
 void WebServer::handle_off() {
