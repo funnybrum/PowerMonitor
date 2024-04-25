@@ -9,4 +9,7 @@ class DataCollector: public InfluxDBCollector {
         void collectData();
         void onPush();
         bool shouldPush();
+        void afterPush() {};
+        virtual void beforePush() {};
+
 };
